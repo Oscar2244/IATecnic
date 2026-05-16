@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IATecnic - Soporte Inteligente</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+        
+        body { 
+            background-color: #0c0c0e; 
+            color: #e1e1e6; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Contenedor Principal en formato Dashboard */
+        .dashboard-container { 
+            display: flex;
+            width: 100%;
+            max-width: 1000px; 
+            height: 85vh; 
+            background: #121214; 
+            border-radius: 16px; 
+            box-shadow: 0 12px 40px rgba(0,0,0,0.6); 
+            overflow: hidden; 
+            border: 1px solid #222226; 
+        }
+
+        /* PANEL IZQUIERDO: Branding IATecnic y Contactos */
+        .sidebar {
+            width: 35%;
+            background: #1a1a1e;
+            border-right: 1px solid #222226;
+            display: flex;
+            flex-direction: column;
+            padding: 25px;
+            overflow-y: auto;
+        }
+
+        .brand-section {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #29292e;
+        }
+
+        .brand-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #00b37e;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .brand-tagline {
+            font-size: 0.85rem;
+            color: #8d8d99;
+        }
+
+        .sidebar-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #00b37e;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        /* Tarjetas de Técnicos */
+        .tech-card {
+            background: #202024;
+            border: 1px solid #29292e;
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin-bottom: 12px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-2px);
+            border-color: #00b37e;
+        }
+
+        .tech-area {
+            font-size: 0.75rem;
+            background: rgba(0, 179, 126, 0.1);
+            color: #00b37e;
+            padding: 2px 6px;
+            border-radius: 4px;
+            display: inline-block;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .tech-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+        .tech-phone {
+            font-size: 0.85rem;
+            color: #a4a4b5;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* PANEL DERECHO: Interfaz del Chat */
+        .chat-area { 
+            width: 65%;
+            display: flex; 
+            flex-direction: column; 
+            background: #121214;
+        }
+
+        .chat-header { 
+            background: #1a1a1e; 
+            padding: 20px; 
+            font-weight: 600; 
+            font-size: 1.05rem; 
+            border-bottom: 1px solid #222226;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #00b37e;
+            border-radius: 5px;
+            box-shadow: 0 0 8px #00b37e;
+        }
+
+        .chat-messages { 
+            flex: 1; 
+            padding: 25px; 
+            overflow-y: auto; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 15px; 
+        }
+
+        /* Burbujas de Mensajes */
+        .message { 
+            max-width: 85%; 
+            padding: 14px 18px; 
+            border-radius: 12px; 
+            font-size: 0.95rem; 
+            line-height: 1.5; 
+            word-break: break-word; 
+        }
+
+        .user-message { 
+            background: #00593c; 
+            color: #ffffff;
+            align-self: flex-end; 
+            border-bottom-right-radius: 0; 
+            box-shadow: 0 4px 12px rgba(0,89,60,0.2);
+        }
+
+        .bot-message { 
+            background: #1a1a1e; 
+            color: #e1e1e6;
+            align-self: flex-start; 
+            border-bottom-left-radius: 0; 
+            border: 1px solid #29292e; 
+        }
+
+        /* Estilos corregidos para las respuestas estructuradas */
+        .bot-message p { margin-bottom: 10px; }
+        .bot-message p:last-child { margin-bottom: 0; }
+        .bot-message strong { color: #00b37e; font-weight: 600; }
+        .bot-message ul { margin-left: 20px; margin-bottom: 12px; padding-left: 5px; }
+        .bot-message li { margin-bottom: 6px; list-style-type: disc; }
+
+        /* Área de Entrada de Texto */
+        .chat-input-area { 
+            padding: 20px; 
+            background: #1a1a1e; 
+            display: flex; 
+            gap: 12px; 
+            border-top: 1px solid #222226; 
+        }
+
+        input { 
+            flex: 1; 
+            background: #121214; 
+            border: 1px solid #29292e; 
+            padding: 14px; 
+            border-radius: 8px; 
+            color: #fff; 
+            font-size: 0.95rem; 
+            outline: none; 
+            transition: border-color 0.2s;
+        }
+
+        input:focus { border-color: #00b37e; }
+        input:disabled { background: #1a1a1e; color: #757575; cursor: not-allowed; }
+
+        button { 
+            background: #00875f; 
+            border: none; 
+            color: white; 
+            padding: 0 24px; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            font-size: 0.95rem;
+            cursor: pointer; 
+            transition: background 0.2s; 
+        }
+
+        button:hover { background: #00b37e; }
+        button:disabled { background: #29292e; color: #757575; cursor: not-allowed; }
+
+        /* Animación de Carga Flotante */
+        .typing-indicator {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            height: 20px;
+            padding: 2px 0;
+        }
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: #00b37e;
+            border-radius: 50%;
+            animation: pulse 1.4s infinite ease-in-out both;
+        }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes pulse {
+            0%, 80%, 100% { transform: scale(0.4); opacity: 0.4; }
+            40% { transform: scale(1.2); opacity: 1; }
+        }
+
+        /* Responsivo para celulares */
+        @media (max-width: 768px) {
+            .dashboard-container { flex-direction: column; height: 95vh; }
+            .sidebar { width: 100%; height: 35%; border-right: none; border-bottom: 1px solid #222226; padding: 15px; }
+            .chat-area { width: 100%; height: 65%; }
+            .brand-section { margin-bottom: 15px; padding-bottom: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard-container">
+    <div class="sidebar">
+        <div class="brand-section">
+            <div class="brand-logo">IATecnic</div>
+            <div class="brand-tagline">Diagnóstico Inteligente de PC</div>
+        </div>
+        
+        <div class="sidebar-title">Asistencia Técnica</div>
+        
+        <div class="tech-card">
+            <span class="tech-area">Área de Software</span>
+            <div class="tech-name">Oscar Ocampos</div>
+            <div class="tech-phone">📞 0986 210340</div>
+        </div>
+
+        <div class="tech-card">
+            <span class="tech-area">Área de Hardware</span>
+            <div class="tech-name">Ing. Ramón Ayala</div>
+            <div class="tech-phone">📞 0981 111222</div>
+        </div>
+
+        <div class="tech-card">
+            <span class="tech-area">Redes e Internet</span>
+            <div class="tech-name">Carlos Giménez</div>
+            <div class="tech-phone">📞 0973 333444</div>
+        </div>
+    </div>
+
+    <div class="chat-area">
+        <div class="chat-header">
+            <div class="status-dot"></div>
+            Asistente Virtual de Soporte
+        </div>
+        
+        <div class="chat-messages" id="chatBox">
+            <div class="message bot-message">¡Hola! Soy tu asistente de soporte de <strong>IATecnic</strong>. Contame, ¿qué problema está presentando tu computadora hoy?</div>
+        </div>
+        
+        <div class="chat-input-area">
+            <input type="text" id="userInput" placeholder="Ej: Mi laptop se calienta mucho y se apaga..." onkeypress="handleKeyPress(event)">
+            <button id="sendBtn" onclick="sendMessage()">Enviar</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // URL definitiva de n8n (Modo Producción Activo)
+    const N8N_WEBHOOK_URL = 'http://localhost:5678/webhook/diagnostico-chat';
+
+    // Función corregida para transformar Markdown básico (** y listas de asteriscos) en HTML real y limpio
+    function formatBotResponse(text) {
+        // Primero convertimos las negritas (**texto**)
+        let formatted = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+        // Separamos por líneas para procesar las listas con viñetas de forma limpia
+        let lines = formatted.split('\n');
+        let inList = false;
+        let resultHtml = '';
+
+        lines.forEach(line => {
+            let trimmedLine = line.trim();
+            
+            if (trimmedLine.startsWith('*')) {
+                if (!inList) {
+                    resultHtml += '<ul>';
+                    inList = true;
+                }
+                // Quitamos el asterisco original y envolvemos correctamente en etiquetas <li> reales
+                let itemContent = trimmedLine.substring(1).trim();
+                resultHtml += `<li>${itemContent}</li>`;
+            } else {
+                if (inList) {
+                    resultHtml += '</ul>';
+                    inList = false;
+                }
+                if (trimmedLine) {
+                    resultHtml += `<p>${trimmedLine}</p>`;
+                } else {
+                    resultHtml += '<br>';
+                }
+            }
+        });
+
+        if (inList) {
+            resultHtml += '</ul>';
+        }
+
+        return resultHtml;
+    }
+
+    async function sendMessage() {
+        const inputElement = document.getElementById('userInput');
+        const sendButton = document.getElementById('sendBtn');
+        const messageText = inputElement.value.trim();
+        if (!messageText) return;
+
+        // 1. Deshabilitar controles para evitar doble envío y bugs visuales
+        inputElement.disabled = true;
+        sendButton.disabled = true;
+
+        // 2. Imprimir mensaje del usuario
+        appendMessage(messageText, 'user-message', false, null);
+        inputElement.value = '';
+
+        // 3. Crear indicador de carga animado con un ID interno único controlado
+        const typingIndicatorHtml = `
+            <div class="typing-indicator" id="typingIndicator">
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+            </div>`;
+        const loaderWrapperId = appendMessage(typingIndicatorHtml, 'bot-message', true, 'loader-msg');
+
+        try {
+            // 4. Petición POST a n8n
+            const response = await fetch(N8N_WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ mensaje: messageText })
+            });
+
+            if (!response.ok) throw new Error('Error en el servidor');
+
+            const data = await response.json();
+            
+            // 5. Destruir el indicador de carga de forma fulminante e infalible antes de mostrar la respuesta
+            const loaderMsgElement = document.getElementById(loaderWrapperId);
+            if (loaderMsgElement) loaderMsgElement.remove();
+
+            // 6. Analizar y parsear la ruta del JSON de n8n
+            let botReply = "No pude procesar el diagnóstico en este momento.";
+            
+            if (Array.isArray(data) && data[0]?.content?.parts?.[0]?.text) {
+                botReply = data[0].content.parts[0].text;
+            } else if (data?.content?.parts?.[0]?.text) {
+                botReply = data.content.parts[0].text;
+            } else if (data && data.text) {
+                botReply = data.text;
+            } else if (data && data.output) {
+                botReply = data.output;
+            } else if (typeof data === 'string') {
+                botReply = data;
+            }
+
+            // 7. Imprimir respuesta perfectamente formateada en HTML
+            appendMessage(formatBotResponse(botReply), 'bot-message', true, null);
+
+        } catch (error) {
+            console.error(error);
+            // Si hay error, removemos la carga y avisamos
+            const loaderMsgElement = document.getElementById(loaderWrapperId);
+            if (loaderMsgElement) loaderMsgElement.remove();
+            appendMessage('Error al conectar con IATecnic. Por favor, vuelve a intentar.', 'bot-message', false, null);
+        } finally {
+            // 8. Re-habilitar los controles pase lo que pase
+            inputElement.disabled = false;
+            sendButton.disabled = false;
+            inputElement.focus();
+        }
+    }
+
+    function appendMessage(content, className, isHtml, customId) {
+        const chatBox = document.getElementById('chatBox');
+        const messageDiv = document.createElement('div');
+        // Si pasamos un ID específico lo usa, sino genera uno dinámico
+        const id = customId ? customId : 'msg-' + Date.now() + Math.random().toString(36).substr(2, 5);
+        
+        messageDiv.id = id;
+        messageDiv.className = `message ${className}`;
+        
+        if (isHtml) {
+            messageDiv.innerHTML = content;
+        } else {
+            messageDiv.innerText = content;
+        }
+        
+        chatBox.appendChild(messageDiv);
+        chatBox.scrollTop = chatBox.scrollHeight;
+        return id;
+    }
+
+    function handleKeyPress(event) {
+        if (event.key === 'Enter' && !document.getElementById('userInput').disabled) {
+            sendMessage();
+        }
+    }
+</script>
+
+</body>
+</html>
