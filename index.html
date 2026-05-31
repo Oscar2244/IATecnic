@@ -141,9 +141,154 @@
         </div>
     </div>
 
+<<<<<<< HEAD
     <footer>
         <p>&copy; 2026 IATecnic. Desarrollado para diagnóstico inteligente.</p>
     </footer>
+=======
+<script>
+    // URL definitiva de n8n (Modo Producción Activo)
+    const N8N_WEBHOOK_URL = 'http://localhost:5678/webhook/diagnostico-chat';
+
+    // Función corregida para transformar Markdown básico (** y listas de asteriscos) en HTML real y limpio
+    function formatBotResponse(text) {
+        // Primero convertimos las negritas (**texto**)
+        let formatted = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+        // Separamos por líneas para procesar las listas con viñetas de forma limpia
+        let lines = formatted.split('\n');
+        let inList = false;
+        let resultHtml = '';
+
+        lines.forEach(line => {
+            let trimmedLine = line.trim();
+            
+            if (trimmedLine.startsWith('*')) {
+                if (!inList) {
+                    resultHtml += '<ul>';
+                    inList = true;
+                }
+                // Quitamos el asterisco original y envolvemos correctamente en etiquetas <li> reales
+                let itemContent = trimmedLine.substring(1).trim();
+                resultHtml += `<li>${itemContent}</li>`;
+            } else {
+                if (inList) {
+                    resultHtml += '</ul>';
+                    inList = false;
+                }
+                if (trimmedLine) {
+                    resultHtml += `<p>${trimmedLine}</p>`;
+                } else {
+                    resultHtml += '<br>';
+                }
+            }
+        });
+
+        if (inList) {
+            resultHtml += '</ul>';
+        }
+
+        return resultHtml;
+    }
+
+    async function sendMessage() {
+        const inputElement = document.getElementById('userInput');
+        const sendButton = document.getElementById('sendBtn');
+        const messageText = inputElement.value.trim();
+        if (!messageText) return;
+
+        // 1. Deshabilitar controles para evitar doble envío y bugs visuales
+        inputElement.disabled = true;
+        sendButton.disabled = true;
+
+        // 2. Imprimir mensaje del usuario
+        appendMessage(messageText, 'user-message', false, null);
+        inputElement.value = '';
+
+        // 3. Crear indicador de carga animado con un ID interno único controlado
+        const typingIndicatorHtml = `
+            <div class="typing-indicator" id="typingIndicator">
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+            </div>`;
+        const loaderWrapperId = appendMessage(typingIndicatorHtml, 'bot-message', true, 'loader-msg');
+
+        try {
+            // 4. Petición POST a n8n
+            const response = await fetch(N8N_WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ mensaje: messageText })
+            });
+
+            if (!response.ok) throw new Error('Error en el servidor');
+
+            const data = await response.json();
+            
+            // 5. Destruir el indicador de carga de forma fulminante e infalible antes de mostrar la respuesta
+            const loaderMsgElement = document.getElementById(loaderWrapperId);
+            if (loaderMsgElement) loaderMsgElement.remove();
+
+            // 6. Analizar y parsear la ruta del JSON de n8n
+            let botReply = "No pude procesar el diagnóstico en este momento.";
+            
+            if (Array.isArray(data) && data[0]?.content?.parts?.[0]?.text) {
+                botReply = data[0].content.parts[0].text;
+            } else if (data?.content?.parts?.[0]?.text) {
+                botReply = data.content.parts[0].text;
+            } else if (data && data.text) {
+                botReply = data.text;
+            } else if (data && data.output) {
+                botReply = data.output;
+            } else if (typeof data === 'string') {
+                botReply = data;
+            }
+
+            // 7. Imprimir respuesta perfectamente formateada en HTML
+            appendMessage(formatBotResponse(botReply), 'bot-message', true, null);
+
+        } catch (error) {
+            console.error(error);
+            // Si hay error, removemos la carga y avisamos
+            const loaderMsgElement = document.getElementById(loaderWrapperId);
+            if (loaderMsgElement) loaderMsgElement.remove();
+            appendMessage('Error al conectar con IATecnic. Por favor, vuelve a intentar.', 'bot-message', false, null);
+        } finally {
+            // 8. Re-habilitar los controles pase lo que pase
+            inputElement.disabled = false;
+            sendButton.disabled = false;
+            inputElement.focus();
+        }
+    }
+//ESPERO QUE YA FUNCIONEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+    function appendMessage(content, className, isHtml, customId) {
+        const chatBox = document.getElementById('chatBox');
+        const messageDiv = document.createElement('div');
+        // Si pasamos un ID específico lo usa, sino genera uno dinámico
+        const id = customId ? customId : 'msg-' + Date.now() + Math.random().toString(36).substr(2, 5);
+        
+        messageDiv.id = id;
+        messageDiv.className = `message ${className}`;
+        
+        if (isHtml) {
+            messageDiv.innerHTML = content;
+        } else {
+            messageDiv.innerText = content;
+        }
+        
+        chatBox.appendChild(messageDiv);
+        chatBox.scrollTop = chatBox.scrollHeight;
+        return id;
+    }
+
+    function handleKeyPress(event) {
+        if (event.key === 'Enter' && !document.getElementById('userInput').disabled) {
+            sendMessage();
+        }
+    }
+</script>
+>>>>>>> 80ecc98e59b9fb23516452e9389192a770f60872
 
     <script src="main.js"></script>
 </body>
