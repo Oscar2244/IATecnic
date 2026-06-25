@@ -4,136 +4,295 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IATecnic - Soporte Inteligente</title>
+    <title>IATecnic — Soporte Inteligente</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
+    <!-- NAVBAR -->
     <nav class="navbar">
-        <div class="logo">IATecnic<span>.</span></div>
+        <div class="logo">
+            <svg class="logo-icon" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L2 7v10l10 5 10-5V7L12 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="M12 2v20M2 7l10 5 10-5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            </svg>
+            IATecnic
+        </div>
         <div class="nav-links">
             <a href="#inicio">Inicio</a>
             <a href="#servicios">Servicios</a>
             <a href="#equipo">Expertos</a>
             <button class="nav-cta" onclick="toggleChat()">Diagnóstico IA</button>
         </div>
+        <button class="nav-hamburger" onclick="toggleMobileMenu()">
+            <span></span><span></span><span></span>
+        </button>
     </nav>
 
+    <div class="mobile-menu hidden" id="mobileMenu">
+        <a href="#inicio" onclick="toggleMobileMenu()">Inicio</a>
+        <a href="#servicios" onclick="toggleMobileMenu()">Servicios</a>
+        <a href="#equipo" onclick="toggleMobileMenu()">Expertos</a>
+        <button class="nav-cta" onclick="toggleChat(); toggleMobileMenu()">Diagnóstico IA</button>
+    </div>
+
+    <!-- HERO -->
     <header class="hero" id="inicio">
-        <div class="hero-content reveal fade-bottom">
-            <h1>Soporte Técnico Elevado por <span>Inteligencia Artificial</span></h1>
-            <p>Diagnósticos precisos en segundos. Describe tu problema y nuestra IA te conectará con el especialista
-                adecuado para hardware, software o redes.</p>
-            <button class="cta-button" onclick="toggleChat()">Iniciar Análisis</button>
-        </div>
-        <div class="hero-graphic reveal fade-left">
-            <div class="glow-circle"></div>
+        <div class="hero-grid">
+            <div class="hero-content reveal fade-bottom">
+                <div class="eyebrow">
+                    <span class="eyebrow-line"></span>
+                    Soporte técnico especializado
+                </div>
+                <h1>Diagnóstico preciso,<br>solución inmediata.</h1>
+                <p>Describe el problema de tu equipo y nuestra inteligencia artificial lo analiza en segundos, conectándote con el especialista adecuado en hardware, software, redes o seguridad.</p>
+                <div class="hero-actions">
+                    <button class="cta-button" onclick="toggleChat()">Iniciar Diagnóstico</button>
+                    <a href="#servicios" class="cta-ghost">
+                        Ver servicios
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-num">98%</span>
+                        <span class="stat-label">Resolución en primer contacto</span>
+                    </div>
+                    <div class="stat-div"></div>
+                    <div class="stat">
+                        <span class="stat-num">&lt;60s</span>
+                        <span class="stat-label">Tiempo de diagnóstico</span>
+                    </div>
+                    <div class="stat-div"></div>
+                    <div class="stat">
+                        <span class="stat-num">4</span>
+                        <span class="stat-label">Especialistas certificados</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image-col reveal fade-left">
+                <div class="hero-img-frame">
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&q=85&auto=format&fit=crop" alt="Infraestructura de servidores" loading="eager">
+                    <div class="hero-img-overlay"></div>
+                    <div class="hero-img-badge">
+                        <span class="badge-dot"></span>
+                        Sistema en línea
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
+    <!-- SERVICIOS -->
     <section class="services" id="servicios">
-        <h2 class="section-title reveal fade-bottom">Nuestros Servicios</h2>
+        <div class="section-header reveal fade-bottom">
+            <div class="eyebrow"><span class="eyebrow-line"></span>Capacidades</div>
+            <h2>Nuestros Servicios</h2>
+            <p class="section-sub">Cobertura técnica integral, desde el componente hasta la infraestructura.</p>
+        </div>
         <div class="services-grid">
+
+            <div class="service-card reveal fade-bottom" style="transition-delay: 0.05s;">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=600&q=80&auto=format&fit=crop" alt="Software" loading="lazy">
+                    <div class="card-img-overlay"></div>
+                </div>
+                <div class="card-body">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                    </div>
+                    <h3>Software & Sistemas Operativos</h3>
+                    <p>Resolución de pantallazos azules, optimización de Windows/Linux y configuración de entornos de desarrollo.</p>
+                </div>
+            </div>
+
             <div class="service-card reveal fade-bottom" style="transition-delay: 0.1s;">
-                <div class="icon">💻</div>
-                <h3>Software & SO</h3>
-                <p>Resolución de pantallazos azules, optimización de Windows/Linux y configuración de entornos de
-                    desarrollo.</p>
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80&auto=format&fit=crop" alt="Hardware" loading="lazy">
+                    <div class="card-img-overlay"></div>
+                </div>
+                <div class="card-body">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+                    </div>
+                    <h3>Hardware & Minería</h3>
+                    <p>Diagnóstico de componentes, control térmico de ASICs/GPUs y troubleshooting avanzado de equipos físicos.</p>
+                </div>
             </div>
+
+            <div class="service-card reveal fade-bottom" style="transition-delay: 0.15s;">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=600&q=80&auto=format&fit=crop" alt="Redes" loading="lazy">
+                    <div class="card-img-overlay"></div>
+                </div>
+                <div class="card-body">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"/></svg>
+                    </div>
+                    <h3>Redes & Servidores</h3>
+                    <p>Gestión de infraestructura, servidores RADIUS, portales cautivos y optimización de latencia.</p>
+                </div>
+            </div>
+
             <div class="service-card reveal fade-bottom" style="transition-delay: 0.2s;">
-                <div class="icon">🔧</div>
-                <h3>Hardware & Minería</h3>
-                <p>Diagnóstico de componentes, control térmico (ASIC/GPU) y troubleshooting avanzado de equipos físicos.
-                </p>
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&q=80&auto=format&fit=crop" alt="Seguridad" loading="lazy">
+                    <div class="card-img-overlay"></div>
+                </div>
+                <div class="card-body">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3>Seguridad Informática</h3>
+                    <p>Análisis de vulnerabilidades, eliminación de malware persistente y bastionado de sistemas.</p>
+                </div>
             </div>
+
+            <div class="service-card reveal fade-bottom" style="transition-delay: 0.25s;">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=600&q=80&auto=format&fit=crop" alt="Datos" loading="lazy">
+                    <div class="card-img-overlay"></div>
+                </div>
+                <div class="card-body">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                    </div>
+                    <h3>Recuperación de Datos</h3>
+                    <p>Extracción de información en discos dañados y restauración de bases de datos corruptas.</p>
+                </div>
+            </div>
+
             <div class="service-card reveal fade-bottom" style="transition-delay: 0.3s;">
-                <div class="icon">🌐</div>
-                <h3>Redes & Servidores</h3>
-                <p>Gestión de infraestructura, servidores RADIUS, portales cautivos y optimización de latencia.</p>
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&q=80&auto=format&fit=crop" alt="Mantenimiento" loading="lazy">
+                    <div class="card-img-overlay"></div>
+                </div>
+                <div class="card-body">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                    </div>
+                    <h3>Mantenimiento Preventivo</h3>
+                    <p>Limpieza profunda, cambio de pasta térmica y auditoría de salud de discos para evitar fallos críticos.</p>
+                </div>
             </div>
-            <div class="service-card reveal fade-bottom" style="transition-delay: 0.4s;">
-                <div class="icon">🛡️</div>
-                <h3>Seguridad Informática</h3>
-                <p>Análisis de vulnerabilidades, eliminación de malware persistente y bastionado de sistemas
-                    (Hardening).</p>
-            </div>
-            <div class="service-card reveal fade-bottom" style="transition-delay: 0.5s;">
-                <div class="icon">💾</div>
-                <h3>Recuperación de Datos</h3>
-                <p>Extracción de información en discos dañados lógicamente y restauración de bases de datos corruptas.
-                </p>
-            </div>
-            <div class="service-card reveal fade-bottom" style="transition-delay: 0.6s;">
-                <div class="icon">⚙️</div>
-                <h3>Mantenimiento Preventivo</h3>
-                <p>Limpieza profunda, cambio de pasta térmica y auditoría de salud de discos para evitar fallos
-                    críticos.</p>
-            </div>
+
         </div>
     </section>
 
+    <!-- EXPERTOS -->
     <section class="experts" id="equipo">
-        <h2 class="section-title reveal fade-bottom">Equipo de Especialistas</h2>
+        <div class="section-header reveal fade-bottom">
+            <div class="eyebrow"><span class="eyebrow-line"></span>Equipo</div>
+            <h2>Especialistas</h2>
+            <p class="section-sub">Cada técnico certificado en su área. La IA te dirige al indicado.</p>
+        </div>
         <div class="experts-grid">
 
-            <div class="expert-card reveal fade-bottom" style="transition-delay: 0.1s;">
-                <div class="expert-avatar">SB</div>
+            <div class="expert-card reveal fade-bottom" style="transition-delay: 0.05s;">
+                <div class="expert-header">
+                    <div class="expert-avatar">SB</div>
+                    <div class="expert-status"><span class="status-dot"></span>En línea</div>
+                </div>
                 <h3>Sara Bogado</h3>
                 <span class="expert-role">Especialista en Hardware</span>
-                <a href="https://wa.me/595984476045" class="expert-contact" target="_blank">📞 0984 476045</a>
+                <div class="expert-tags"><span>ASIC</span><span>GPU</span><span>PCB</span></div>
+                <a href="https://wa.me/595984476045" class="expert-contact" target="_blank">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.531 5.861L0 24l6.305-1.507A11.946 11.946 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.028-1.385l-.36-.214-3.742.895.942-3.629-.236-.374A9.796 9.796 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+                    0984 476 045
+                </a>
+            </div>
+
+            <div class="expert-card reveal fade-bottom" style="transition-delay: 0.1s;">
+                <div class="expert-header">
+                    <div class="expert-avatar">FB</div>
+                    <div class="expert-status"><span class="status-dot"></span>En línea</div>
+                </div>
+                <h3>Florencia Baez</h3>
+                <span class="expert-role">Especialista en Software</span>
+                <div class="expert-tags"><span>Windows</span><span>Linux</span><span>Dev</span></div>
+                <a href="https://wa.me/595984781454" class="expert-contact" target="_blank">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.531 5.861L0 24l6.305-1.507A11.946 11.946 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.028-1.385l-.36-.214-3.742.895.942-3.629-.236-.374A9.796 9.796 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+                    0984 781 454
+                </a>
+            </div>
+
+            <div class="expert-card reveal fade-bottom" style="transition-delay: 0.15s;">
+                <div class="expert-header">
+                    <div class="expert-avatar">FM</div>
+                    <div class="expert-status"><span class="status-dot"></span>En línea</div>
+                </div>
+                <h3>Fabiana Mendosa</h3>
+                <span class="expert-role">Seguridad de Software</span>
+                <div class="expert-tags"><span>Malware</span><span>Hardening</span><span>CVE</span></div>
+                <a href="https://wa.me/595984287368" class="expert-contact" target="_blank">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.531 5.861L0 24l6.305-1.507A11.946 11.946 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.028-1.385l-.36-.214-3.742.895.942-3.629-.236-.374A9.796 9.796 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+                    0984 287 368
+                </a>
             </div>
 
             <div class="expert-card reveal fade-bottom" style="transition-delay: 0.2s;">
-                <div class="expert-avatar">FB</div>
-                <h3>Florencia Baez</h3>
-                <span class="expert-role">Especialista en Software</span>
-                <a href="https://wa.me/595984781454" class="expert-contact" target="_blank">📞 0984 781454</a>
-            </div>
-
-            <div class="expert-card reveal fade-bottom" style="transition-delay: 0.3s;">
-                <div class="expert-avatar">FM</div>
-                <h3>Fabiana Mendosa</h3>
-                <span class="expert-role">Seguridad de Software</span>
-                <a href="https://wa.me/595984287368" class="expert-contact" target="_blank">📞 0984 287368</a>
-            </div>
-
-            <div class="expert-card reveal fade-bottom" style="transition-delay: 0.4s;">
-                <div class="expert-avatar">OO</div>
+                <div class="expert-header">
+                    <div class="expert-avatar">OO</div>
+                    <div class="expert-status"><span class="status-dot"></span>En línea</div>
+                </div>
                 <h3>Oscar Ocampos</h3>
                 <span class="expert-role">Especialista en Redes</span>
-                <a href="https://wa.me/595986210340" class="expert-contact" target="_blank">📞 0986 210340</a>
+                <div class="expert-tags"><span>RADIUS</span><span>VPN</span><span>LAN</span></div>
+                <a href="https://wa.me/595986210340" class="expert-contact" target="_blank">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.531 5.861L0 24l6.305-1.507A11.946 11.946 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 0 1-5.028-1.385l-.36-.214-3.742.895.942-3.629-.236-.374A9.796 9.796 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+                    0986 210 340
+                </a>
             </div>
+
         </div>
     </section>
 
-    <button class="floating-chat-btn pulse-anim" onclick="toggleChat()" id="chatToggleBtn">
-        💬 Asistencia IA
+    <!-- FLOATING BTN -->
+    <button class="floating-chat-btn" onclick="toggleChat()" id="chatToggleBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+        Asistencia IA
     </button>
 
+    <!-- CHAT WIDGET -->
     <div class="chat-widget hidden" id="chatWidget">
         <div class="chat-header">
             <div class="header-info">
-                <div class="status-dot"></div>
-                <span>IATecnic</span>
+                <div class="header-avatar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7v10l10 5 10-5V7L12 2z"/><path d="M12 2v20M2 7l10 5 10-5"/></svg>
+                </div>
+                <div>
+                    <div class="header-name">IATecnic</div>
+                    <div class="header-sub"><span class="status-dot pulse"></span>Sistema activo</div>
+                </div>
             </div>
-            <button class="close-btn" onclick="toggleChat()">✕</button>
+            <div class="header-controls">
+                <button class="ctrl-btn" onclick="expandChat()" id="expandBtn" title="Expandir">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                </button>
+                <button class="ctrl-btn" onclick="toggleChat()" title="Cerrar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
         </div>
 
         <div class="chat-messages" id="chatBox">
             <div class="message bot-message">
-                ¡Sistema en línea! Soy tu asistente de <strong>IATecnic</strong>.<br><br>
-                Contame, ¿qué síntomas presenta tu equipo hoy?
+                Sistema activo. Soy el asistente de <strong>IATecnic</strong>.<br><br>
+                ¿Qué síntomas presenta tu equipo?
             </div>
         </div>
 
         <div class="chat-input-area">
-            <input type="text" id="userInput" placeholder="Ej: Mi laptop se reinicia sola al abrir juegos..."
+            <input type="text" id="userInput" placeholder="Describe el problema de tu equipo..."
                 onkeypress="handleKeyPress(event)" autocomplete="off">
             <button id="sendBtn" onclick="sendMessage()">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="22" y1="2" x2="11" y2="13"></line>
                     <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
                 </svg>
@@ -141,11 +300,20 @@
         </div>
     </div>
 
+    <!-- FOOTER -->
     <footer>
-        <p>&copy; 2026 IATecnic. Desarrollado para diagnóstico inteligente.</p>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2L2 7v10l10 5 10-5V7L12 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                    <path d="M12 2v20M2 7l10 5 10-5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                </svg>
+                IATecnic
+            </div>
+            <p>&copy; 2026 IATecnic. Diagnóstico inteligente para soporte técnico avanzado.</p>
+        </div>
     </footer>
 
     <script src="main.js"></script>
 </body>
-
 </html>
